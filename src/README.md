@@ -1,4 +1,6 @@
-To interact with Langflow agents, 
+
+### Interact with Langflow agents
+To interact with Langflow agents, separate chat sessions with session id (the corresponding session will be created if not already exists). For example,
 
 ```
 curl -X POST \
