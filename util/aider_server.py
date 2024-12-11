@@ -26,9 +26,9 @@ async def lifespan(app: FastAPI):
         )
         while True:
             line = aider_process.stdout.readline()
-            # print(f"ALL:{repr(line)}")
+            print(f"Aider: {line}")
             if wait_for_prompt(line):
-                print(line)
+                print("[Waiting for user input...]")
                 break
         print("Aider process started.")
         yield
