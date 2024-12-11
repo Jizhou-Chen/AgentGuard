@@ -53,7 +53,7 @@ class AgentGuard:
 
     def _gen_query_prompt(self, user_prompt: str):
         msgs = [self.sys_msg, HumanMessage(content=user_prompt)]
-        query_prompt = self.llm(msgs).content
+        query_prompt = self.llm.invoke(msgs).content
         return query_prompt
 
     # TODO: retry should be determined by the AgentGuard based on the repsonse's quality
