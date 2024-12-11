@@ -11,6 +11,9 @@ aider_process = None
 def wait_for_prompt(line):
     return line[:-1].strip().endswith((">", "]:"))
 
+def is_response(line):
+    return "─────────" not in line and "Tokens:" not in line and ">"!=line.strip() and not line.strip().startswith("> ")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -61,7 +64,8 @@ async def interact_with_aider(request: CommandRequest):
             # print(f"ALL:{repr(line)}")
             if line.strip() and line != "\n":
                 print(f"Aider: {line}")
-                output.append(line.strip())
+                if is_response(line):
+                    output.append(line.strip())
 
             if wait_for_prompt(line):
                 print("[Waiting for user input...]")
