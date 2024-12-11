@@ -141,8 +141,8 @@ if __name__ == "__main__":
     agent_guard = AgentGuard(target_agent_endpoint=target_agent.endpoint)
 
     # Test query
-    # user_prompt = "Generate a prompt to let Aider write a Python code to solve a simple math problem as if you are directly interaction with Aider"
-    # print(agent_guard.query_target_agent(user_prompt=user_prompt))
+    user_prompt = "Generate a prompt to let Aider write a Python code to solve a simple math problem as if you are directly interacting with Aider"
+    print(agent_guard.query_target_agent(user_prompt=user_prompt))
 
     # Test confirmation
     # TODO: ask ag to generate confirmation automatically
