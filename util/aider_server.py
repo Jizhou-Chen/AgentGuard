@@ -2,6 +2,9 @@ from fastapi import FastAPI, HTTPException
 from subprocess import Popen, PIPE
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
+import logging
+
+logging.basicConfig(level=logging.WARNING)
 
 app = FastAPI()
 
@@ -11,8 +14,14 @@ aider_process = None
 def wait_for_prompt(line):
     return line[:-1].strip().endswith((">", "]:"))
 
+
 def is_response(line):
-    return "─────────" not in line and "Tokens:" not in line and ">"!=line.strip() and not line.strip().startswith("> ")
+    return "->" in line or (
+        "─────────" not in line
+        and "Tokens:" not in line
+        and ">" != line.strip()
+        and not line.strip().startswith("> ")
+    )
 
 
 @asynccontextmanager
@@ -20,7 +29,7 @@ async def lifespan(app: FastAPI):
     global aider_process
     try:
         aider_process = Popen(
-            ["aider"],  # Test with a valid aider command
+            ["aider", "--model=gpt-4o-mini"],  # Test with a valid aider command
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
@@ -61,13 +70,15 @@ async def interact_with_aider(request: CommandRequest):
         output = []
         while True:
             line = aider_process.stdout.readline()
-            # print(f"ALL:{repr(line)}")
+            print(f"ALL:{repr(line)}")
             if line.strip() and line != "\n":
-                print(f"Aider: {line}")
+                print(f"Picked up by Aider: {line}")
                 if is_response(line):
+                    print("^ ADDED to rsp")
                     output.append(line.strip())
 
             if wait_for_prompt(line):
+                # if not line:
                 print("[Waiting for user input...]")
                 break
 
