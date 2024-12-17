@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
     global aider_process
     try:
         aider_process = Popen(
-            ["aider", "--model=gpt-4o-mini"],  # Test with a valid aider command
+            ["aider", "--model=gpt-4o-mini", "--yes"],  # Test with a valid aider command
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,

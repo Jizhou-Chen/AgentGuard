@@ -23,7 +23,8 @@
 
 ### Start Aider
 ```
-mkdir util/workdir cd workdir
+mkdir util/aider_workdir
+cd util/aider_workdir
 git init # required by Aider
 uvicorn aider_server:app --app-dir .. --reload
 ```
@@ -33,7 +34,7 @@ To run AgentGuard, execute the following
 python3 -m src.agent_guard
 ```
 ### Artifacts
-During execution of AgentGuard, arfifacts are generated in `util/workdir/`, including:
+During execution of AgentGuard, arfifacts are generated in `util/aider_workdir/`, including:
 *  Scripts containing test cases for unsafe workflow validation
 * Safety policy rule files to block unsafe workflows
 * History of conversations between AgentGuard and the target agent (Aider) `.aider.chat.history.md`.
