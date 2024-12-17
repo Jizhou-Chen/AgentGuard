@@ -23,7 +23,8 @@
 
 ### Start Aider
 ```
-cd util/aider/workdir
+mkdir util/workdir cd workdir
+git init # required by Aider
 uvicorn aider_server:app --app-dir .. --reload
 ```
 ### Start AgentGuard
