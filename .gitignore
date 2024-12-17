@@ -1,6 +1,7 @@
 .aider*
 .env
 **/*.pyc
+**/*.log
 **/venv/*
 
 !**/*.aider.chat.history.md

@@ -2,9 +2,12 @@ from fastapi import FastAPI, HTTPException
 from subprocess import Popen, PIPE
 from contextlib import asynccontextmanager
 from pydantic import BaseModel
-import logging
+import sys
+from pathlib import Path
 
-logging.basicConfig(level=logging.WARNING)
+ppd = Path(__file__).resolve().parent.parent
+sys.path.append(str(ppd))
+from src.logger import ta_logger as logger
 
 app = FastAPI()
 
@@ -29,7 +32,8 @@ async def lifespan(app: FastAPI):
     global aider_process
     try:
         aider_process = Popen(
-            ["aider", "--model=gpt-4o-mini"],  # Test with a valid aider command
+            # ["aider", "--model=gpt-4o-mini"],
+            ["aider", "--model=o1-preview-2024-09-12"],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
@@ -38,16 +42,16 @@ async def lifespan(app: FastAPI):
         )
         while True:
             line = aider_process.stdout.readline()
-            print(f"Aider: {line}")
+            logger.debug(f"Aider: {line}")
             if wait_for_prompt(line):
-                print("[Waiting for user input...]")
+                logger.debug("[Waiting for user input...]")
                 break
-        print("Aider process started.")
+        logger.debug("Aider process started.")
         yield
     finally:
         if aider_process:
             aider_process.terminate()
-            print("Aider process terminated.")
+            logger.debug("Aider process terminated.")
 
 
 app.router.lifespan_context = lifespan
@@ -70,21 +74,20 @@ async def interact_with_aider(request: CommandRequest):
         output = []
         while True:
             line = aider_process.stdout.readline()
-            print(f"ALL:{repr(line)}")
+            # logger.debug(f"ALL:{repr(line)}")
             if line.strip() and line != "\n":
-                print(f"Picked up by Aider: {line}")
                 if is_response(line):
-                    print("^ ADDED to rsp")
+                    logger.debug(f"Aider: {line}")
                     output.append(line.strip())
 
             if wait_for_prompt(line):
                 # if not line:
-                print("[Waiting for user input...]")
+                logger.debug("[Waiting for user input...]")
                 break
 
         return {"response": "\n".join(output)}
     except Exception as e:
-        print(f"Error: {e}")
+        logger.debug(f"Error: {e}")
         raise HTTPException(
             status_code=500, detail=f"Error interacting with aider: {e}"
         )
