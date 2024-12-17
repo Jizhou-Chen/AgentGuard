@@ -13,4 +13,5 @@ class TargetAgent:
         self.config = config
         self.name = config["name"]
         self.type = config["type"]
+        self.interactive = config.get("interactive_mode", False)
         self.endpoint = f"http://{config['host']}:{config['port']}/{config['endpoint']}"

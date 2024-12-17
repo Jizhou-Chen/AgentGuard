@@ -5,8 +5,8 @@ from pydantic import BaseModel
 import sys
 from pathlib import Path
 
-ppd = Path(__file__).resolve().parent.parent
-sys.path.append(str(ppd))
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
 from src.logger import ta_logger as logger
 
 app = FastAPI()
@@ -32,8 +32,8 @@ async def lifespan(app: FastAPI):
     global aider_process
     try:
         aider_process = Popen(
-            # ["aider", "--model=gpt-4o-mini"],
-            ["aider", "--model=o1-preview-2024-09-12"],
+            ["aider", "--model=gpt-4o-mini", "--yes"],
+            # ["aider", "--model=o1-preview-2024-09-12"],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,

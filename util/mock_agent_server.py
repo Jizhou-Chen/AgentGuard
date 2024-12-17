@@ -3,8 +3,8 @@ from pydantic import BaseModel
 from pathlib import Path
 import sys
 
-ppd = Path(__file__).resolve().parent.parent
-sys.path.append(str(ppd))
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.append(str(BASE_DIR))
 from src.logger import ta_logger as logger
 
 app = FastAPI()
