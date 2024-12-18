@@ -32,8 +32,8 @@ async def lifespan(app: FastAPI):
     global aider_process
     try:
         aider_process = Popen(
-            ["aider", "--model=gpt-4o-mini", "--yes"],
-            # ["aider", "--model=o1-preview-2024-09-12"],
+            # ["aider", "--model=gpt-4o-mini", "--yes"],
+            ["aider", "--model=o1-preview-2024-09-12"],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
@@ -77,11 +77,10 @@ async def interact_with_aider(request: CommandRequest):
             # logger.debug(f"ALL:{repr(line)}")
             if line.strip() and line != "\n":
                 if is_response(line):
-                    logger.debug(f"Aider: {line}")
+                    logger.debug(f"Return: {line}")
                     output.append(line.strip())
 
             if wait_for_prompt(line):
-                # if not line:
                 logger.debug("[Waiting for user input...]")
                 break
 
@@ -91,12 +90,3 @@ async def interact_with_aider(request: CommandRequest):
         raise HTTPException(
             status_code=500, detail=f"Error interacting with aider: {e}"
         )
-
-
-@app.get("/debug")
-async def debug():
-    global aider_process
-    if aider_process:
-        stderr_output = aider_process.stderr.read()
-        return {"stderr": stderr_output}
-    return {"message": "Aider process is not running."}
