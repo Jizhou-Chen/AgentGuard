@@ -65,7 +65,8 @@ class TestGenRspToAgent(unittest.TestCase):
     def test_gen_unsafe_workflow_testcase(self):
         for unsafe_workflow in test_unsafe_workflow["unsafe_workflows"]:
             # print(unsafe_workflow)
-            rsp = self.ag.unsafe_workflow_testcase_generator(unsafe_workflow)
+            # rsp = self.ag.unsafe_workflow_testcase_generator(unsafe_workflow)
+            rsp = self.ag.safety_constraint_generator(workflow=unsafe_workflow, testcase_file="tests/test_general_utility.py")
             print(rsp)
             expected_response = {
                 "is_request": True,
