@@ -4,7 +4,7 @@ AIDER_CONFIG = {
     "host": "127.0.0.1",
     "port": 8000,
     "endpoint": "interact",
-    "interactive_mode": True,
+    "interactive_mode": False,
 }
 
 

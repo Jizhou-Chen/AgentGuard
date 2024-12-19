@@ -33,7 +33,7 @@ async def lifespan(app: FastAPI):
     try:
         aider_process = Popen(
             # ["aider", "--model=gpt-4o-mini", "--yes"],
-            ["aider", "--model=o1-preview-2024-09-12"],
+            ["aider", "--model=o1-preview-2024-09-12", "--yes"],
             stdin=PIPE,
             stdout=PIPE,
             stderr=PIPE,
