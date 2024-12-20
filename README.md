@@ -60,23 +60,16 @@ python3 -m src.agent_guard
 
 During execution, AgentGuard generates security artifacts in 
 
-workdir
-
-:
-
 - **Test Cases**: Scripts for validating unsafe workflow detection
 - **Safety Policies**: Rules that block identified unsafe workflows 
-- **Interaction Logs**: Conversation history between AgentGuard and the target agent in 
-
-.aider.chat.history.md
+- **Interaction Logs**: Conversation history between AgentGuard and the target agent in demos/.aider.chat.history.md
 
 
 
 Full chat histories and examples can be found in 
 
-.aider.chat.history.md
+demos/.aider.chat.history.md
 
-.
 
 ## Status
 
