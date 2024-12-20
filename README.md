@@ -14,7 +14,7 @@ AgentGuard works by:
 
 ## Demo
 
-See AgentGuard in action in our [demo repository](https://github.com/example/agentguard-demo) which shows:
+See AgentGuard in action in our [demo repository](https://github.com/samuelleecong/agentguard_demo) which shows:
 - Real-time workflow analysis
 - Unsafe operation detection
 - Policy enforcement
