@@ -1,5 +1,26 @@
-# AgentAguard
-### Setup Environment
+# AgentGuard
+
+AgentGuard is a security framework that monitors and protects AI agent interactions by detecting and blocking potentially unsafe workflows.
+
+## System Overview
+
+AgentGuard works by:
+1. Monitoring interactions between users and AI agents
+2. Analyzing requested operations for security risks 
+3. Blocking unsafe workflows before they can execute
+4. Generating safety policies and validation tests
+
+![System Architecture](docs/system_diagram.png)
+
+## Demo
+
+See AgentGuard in action in our [demo repository](https://github.com/example/agentguard-demo) which shows:
+- Real-time workflow analysis
+- Unsafe operation detection
+- Policy enforcement
+- Test case generation
+
+## Quick Start
 
 1. **Create a virtual environment**:
     ```sh
@@ -21,19 +42,49 @@
     pip install -r requirements.txt
     ```
 
-### Start Aider
-```
+## Usage
+
+### Start Aider (Target Agent)
+```sh
 mkdir util/workdir && cd util/workdir
-git init # required by Aider
-uvicorn aider_server:app --app-dir .. # Do not use --reload as it may restart the session
+git init  # required by Aider
+uvicorn aider_server:app --app-dir ..  # Do not use --reload as it may restart the session
 ```
+
 ### Start AgentGuard
-To run AgentGuard, execute the following
-```
+```sh 
 python3 -m src.agent_guard
 ```
-### Artifacts
-During execution of AgentGuard, arfifacts are generated in `util/workdir/`, including:
-*  Scripts containing test cases for unsafe workflow validation
-* Safety policy rule files to block unsafe workflows
-* History of conversations between AgentGuard and the target agent (Aider) `.aider.chat.history.md`.
+
+## Generated Artifacts
+
+During execution, AgentGuard generates security artifacts in 
+
+workdir
+
+:
+
+- **Test Cases**: Scripts for validating unsafe workflow detection
+- **Safety Policies**: Rules that block identified unsafe workflows 
+- **Interaction Logs**: Conversation history between AgentGuard and the target agent in 
+
+.aider.chat.history.md
+
+
+
+Full chat histories and examples can be found in 
+
+.aider.chat.history.md
+
+.
+
+## Status
+
+The core components of AgentGuard are functional:
+- Workflow monitoring
+- Risk analysis
+- Policy generation
+- Test case creation
+
+Minor bug fixes and integration improvements are in progress to ensure smooth end-to-end operation.
+
