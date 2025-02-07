@@ -1,4 +1,4 @@
-# AgentGuard: Re-purposing Tool Orchestrator of LLM Agents for Safety Evaluation of Orchestration
+# AgentGuard
 
 ## System Overview
 
@@ -39,19 +39,19 @@ The above phases progressively construct the evaluation report containing a list
 * The validated safety constraints can be enforced to sandbox the behaviors of the agent for safer deployment.
 * The difference in the occurrences of unsafe outcomes before and after applying the safety constraints can be used to quantitatively evaluate the safety improvement in every iteration.
 * The identified unsafe workflows can be collected and serve as a benchmark corpus to measure the safety of similar agents in the same family (i.e., agents with similar functionalities and toolsets).
-*  The validated unsafe workflows along with the test cases can be collected, processed, and shared as threat intelligence for risk detection and early prevention at orchestration time before the execution, hardening similar agents in the same family at deployment, besides the aforementioned safety constraints enforcement as the last line of defense.
+*  The validated unsafe workflows along with the test cases can be collected and shared as threat intelligence to help harden agents in the same family.
 *  **The reports collected over time can serve as samples to help train/finetune LLMs/LAMs for safer tool orchestration.**
 *  ...
 
-
+# Please see our report for details.
 
 ## Demo
 
 **Clarification before we start:**
 
-Due to the limitation of LLM in generating readily applicable SELinux rules (i.e., safety constraints. Detailed in our report), the pipeline often fails at this step, preventing AgentGuard from executing from end to end. Therefore, to demonstrate the expected functionalities of AgentGuard, we use real data generated from previous successful runs in each step to make this demo. Hopefully, we will be able to address this roadblocker by improving the Safety Constraint Expert Agent and provide a end-to-end demo in a live run.
+Due to the limitation of LLM in generating readily applicable SELinux rules (i.e., safety constraints. Detailed in our report), the pipeline often fails at this step, preventing AgentGuard from executing from end to end. Therefore, to demonstrate the expected functionalities of AgentGuard, we use real data generated from previous successful runs in each step to make this demo demonstrate what is expected if everything works as expected. Hopefully, we will be able to address this roadblocker by improving the Safety Constraint Expert Agent and provide a end-to-end demo in a live run.
 
-[Demo Repository](https://github.com/samuelleecong/agentguard_demo)
+[![Demo](http://img.youtube.com/vi/IoDPOFtO2dE/0.jpg)](https://www.youtube.com/watch?v=IoDPOFtO2dE "AgentGuard Demo")
 
 ## Status
 * The current implementation is still a prototype under development. We wished to get all the issues resolved and present a perfect version to you all by the submission DDL, but in reality, we were unable to resolve all of them within the limited time frame with our best efforts :(
