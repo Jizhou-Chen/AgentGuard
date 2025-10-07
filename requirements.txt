@@ -53,7 +53,7 @@ langchain-core==0.3.25
 langchain-openai==0.2.12
 langchain-text-splitters==1.0.0a1
 langsmith==0.2.3
-litellm==1.53.9
+litellm==1.61.15
 markdown-it-py==3.0.0
 MarkupSafe==3.0.2
 marshmallow==3.23.1
